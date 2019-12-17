@@ -2,11 +2,11 @@
 /**
  * @author Pepe Gallardo
  * 
- * La implementación del alumno debe pasar este test experimental
+ * La implementaciï¿½n del alumno debe pasar este test experimental
  */
 public class TestsCorreccion {
 
-	// Comprueba experimentalmente el método unaSolución
+	// Comprueba experimentalmente el mï¿½todo unaSoluciï¿½n
 	public static void testUnaSolucion() {
 		EvaluacionExperimental eval = 
 			new EvaluacionExperimental ("Test de unaSolucion") {
@@ -26,7 +26,7 @@ public class TestsCorreccion {
 		
 	}
 	
-	// Comprueba experimentalmente el método longitudDeSoluciónPD
+	// Comprueba experimentalmente el mï¿½todo longitudDeSoluciï¿½nPD
 	public static void testLongSolucion() {
 		EvaluacionExperimental eval = 
 			new EvaluacionExperimental ("Test de longitudDeSolucionPD") {

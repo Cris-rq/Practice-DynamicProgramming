@@ -1,5 +1,6 @@
-// ALUMNO:
-// GRUPO y TITULACION:
+// ALUMNO: Rafael Moret Galán
+//         Cristina Espejo Roque
+// GRUPO y TITULACION: Ingeniería informática grupo C
 
 /**
  *
@@ -50,7 +51,7 @@ public class SCMC {
 
 	public String t(){
 		return t;
-	}
+	} 
 	
 	public String sigma(){
 		return sigma;
@@ -70,12 +71,19 @@ public class SCMC {
 	 * la tabla @m
 	 */
 	public void solucionaPD(){
-		for(int i = 0; i < r.length(); i++){
-			for(int j = 0; j < t.length(); j++){
-				m[i][j] = longitudDeSolucionPD(i, j);
+		for(int i = 0; i <= r.length(); i++){
+			for(int j = 0; j <= t.length(); j++){
+				if(i == 0 && j >= 0){
+					m[i][j] = j;
+				} else if(j == 0 && i >0){
+					m[i][j] = i;
+				} else if (r.charAt(i-1) == t.charAt(j-1)){
+					m[i][j] = 1 + m[i-1][j-1];
+				} else if (r.charAt(i-1) != t.charAt(j-1)){
+					m[i][j] = 1 + Math.min(m[i-1][j], m[i][j-1]);
+				}
 			}
 		}
-
 	}
 
 
@@ -86,17 +94,8 @@ public class SCMC {
 	 *           de la supersecuencia comun m�s corta de @r y @t
 	 *           a partir de la tabla obtenida por Prog Dinamica
 	 */
-	public int longitudDeSolucionPD(int i, int j){
-		if(i == 0 && j>=0){
-			return j;
-		} else if(j == 0 && i >0){
-			return i;
-		} else if(r.charAt(i) == t.charAt(j)){
-			return 1 + longitudDeSolucionPD(i-1, j-1);
-		} else{
-			return 2 + Math.min(longitudDeSolucionPD(i-1, j), longitudDeSolucionPD(i, j-1));
-		}
-		
+	public int longitudDeSolucionPD(){
+		return m(r.length(), t.length());
 	}
 
 	/**
@@ -104,8 +103,32 @@ public class SCMC {
 	 *         una supersecuencia comun mas corta de @r y @t
 	 */
 	public String unaSolucionPD(){
-		// A Implementar por el alumno
-		return "";
+		int i = r.length();
+		int j = t.length();
+
+		String res = "";
+		while(i > 0 && j > 0){
+			if(r.charAt(i-1) == t.charAt(j-1)){
+				res = r.charAt(i-1) + res;
+				i--;
+				j--;
+			} else {
+				if(m[i][j] == 1 + m[i-1][j]){
+					res = r.charAt(i-1) + res;
+					i--;
+				} else {
+					res = t.charAt(j-1) + res;
+					j--;
+				}
+			}
+		}
+		if(i>0){
+			res = r.substring(0, i) + res;
+		} else {
+			res = t.substring(0, j) + res;
+		}
+		
+		return res;
 	}
 	
 
